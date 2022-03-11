@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href = "style.css">
+    </head>
+    <body>
+    <form >
+
+        <h1>Amicable Number Checker</h1>
+
+        <p>
+            Input a pair of numbers to see if they are amicable, 
+            meaning their factors add up to each other.</p>
+
+        <label for = "x" class = "form_label">
+            First number:
+        </label>
+        
+        <input type = "number" class = "form_entry" id = "x">
+        
+        <label for = "y" class = "form_label">
+            Second number:
+        </label>
+        
+        <input type= "number" class = "form_entry" id="y">
+    </form>
+
+    <div>
+        <button type="button" onclick="checkAmicable()" class = "main_button">
+        Check</button>
+    </div>
+
+    <div id = "result" class = "results">
+        Click the button to see if they are amicable!
+    </div>
+
+<script>
+
+    function isAFactor(factor, number) {
+        return (number % factor === 0)
+    }
+
+    function findFactors (num) {
+    factors = [];
+        for (i = 0; i < num; i++) {
+        if (isAFactor(i, num))
+            factors.push(i);
+    }
+    return factors;
+    }
+
+    function getFactorSum(num) {
+        return findFactors(num).reduce((a, b) => a + b, 0);
+    }
+
+    function isAmicable (x, y) {
+        return (getFactorSum(x) == y && getFactorSum(y) == x)
+    }
+
+    function checkAmicable() {
+        x = document.getElementById('x').value;
+        y = document.getElementById('y').value;
+        if (isAmicable(x,y)) {
+            document.getElementById('result').innerHTML = 
+            x + " and "+ y +" are amicable."
+        } else {
+            document.getElementById('result').innerHTML = 
+            x + " and "+ y +" are not amicable."
+        }
+    }
+
+</script>
+
+</html>
